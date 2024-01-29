@@ -1,9 +1,11 @@
 import Image from "next/image";
 
+import Hero from "@/components/Hero";
+
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      <h1>Hello Next JS</h1>
+      <Hero/>
     </main>
   );
 }
