@@ -3,8 +3,6 @@
 import { useState } from "react"
 
 const CustomButton = () => {
-
-
     
   return (
     <button
@@ -12,8 +10,11 @@ const CustomButton = () => {
         type="button"
         className={`custom-btn`}
         onClick={()=>{}}
+        
     >
-        View
+        <span className="flex-1">
+            View
+        </span>
     </button>
   )
 }
