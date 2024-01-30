@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-const CustomButton = () => {
+const CustomButton = ({title ,containerStyles,handleClick}) => {
     
   return (
     <button
@@ -13,7 +13,7 @@ const CustomButton = () => {
         
     >
         <span className="flex-1">
-            View
+            
         </span>
     </button>
   )
