@@ -3,12 +3,12 @@
 import { useState } from "react"
 import { CustomeButtonProps } from "@/types"
 
-const CustomButton = ({title, containerStyles, handleClick} : CustomeButtonProps) => {
+const CustomButton = ({title, containerStyles, handleClick, btnType} : CustomeButtonProps) => {
     
   return (
     <button
         disabled={false}
-        type="button"
+        type={btnType||"button"}
         className={`custom-btn ${containerStyles}`}
         onClick={handleClick}
         
