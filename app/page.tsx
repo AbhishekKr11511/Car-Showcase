@@ -1,26 +1,29 @@
-import Image from "next/image";
+import { fetchCars } from "@utils";
+import { HomeProps } from "@types";
+import { fuels, yearsOfProduction } from "@constants";
+import CarCard from "@components/CarCard";
+import ShowMore from "@components/ShowMore";
+import SearchBar from "@components/SearchBar";
+import CustomFilter from "@components/CustomFilter";
+import Hero from "@components/Hero";
 
-import Hero from "@/components/Hero";
-import SearchBar from "@/components/SearchBar";
-import CustomFilter from "@/components/CustomFilter";
-import CarCard from "@/components/CarCard";
-import ShowMore from "@/components/ShowMore";
-import { fetchCars } from "@/utils";
+export default async function Home({ searchParams }: HomeProps) {
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer || "",
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || "",
+    limit: searchParams.limit || 10,
+    model: searchParams.model || "",
+  });
 
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
-export default async function Home() {
-
-  const allCars = await fetchCars("audi")
-
-  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars
-
-  console.log(allCars)
-  
   return (
-    <main className="overflow-hidden">
-      <Hero/>
-      <div className="mt-12 padding-x padding-y max-width" id="discover">
-        <div className="home__text-container">
+    <main className='overflow-hidden'>
+      <Hero />
+
+      <div className='mt-12 padding-x padding-y max-width' id='discover'>
+        <div className='home__text-container'>
           <h1 className='text-4xl font-extrabold'>Car Catalogue</h1>
           <p>Explore out cars you might like</p>
         </div>
@@ -29,8 +32,8 @@ export default async function Home() {
           <SearchBar />
 
           <div className='home__filter-container'>
-            <CustomFilter title='fuel' />
-            <CustomFilter title='year' />
+            <CustomFilter title='fuel' options={fuels} />
+            <CustomFilter title='year' options={yearsOfProduction} />
           </div>
         </div>
 
@@ -53,9 +56,7 @@ export default async function Home() {
             <p>{allCars?.message}</p>
           </div>
         )}
-        
       </div>
-      
     </main>
   );
 }
